@@ -63,7 +63,7 @@ public class Launcher extends CordovaPlugin {
 
 			if (isApplicationInstalled(appPackageName)) {
 				// Launch MyChart with the organization selected
-				mycordova.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("epicmychart://orgselect?orgID="+orgID)));
+				 this.cordova.getActivity().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("epicmychart://orgselect?orgID="+orgID)));
 		 	}
 		 	else {
 				// Open MyChart in play store
@@ -589,10 +589,10 @@ public class Launcher extends CordovaPlugin {
 		final CordovaInterface mycordova = cordova;
 		try {
 			//open in Market if installed
-			mycordova.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + packageName)));
+			this.cordova.getActivity().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + packageName)));
 		}
 		catch (android.content.ActivityNotFoundException exception) {
-			mycordova.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + packageName)));
+			this.cordova.getActivity().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + packageName)));
 		}
  	}
 }
