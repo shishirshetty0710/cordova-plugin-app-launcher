@@ -27,7 +27,7 @@
 
 	NSURL *launchURL = [NSURL URLWithString:@"epicmychart://orgselect?orgID=1353"];
 
-	if ([[UIApplication sharedApplication] canOpenURL: [NSURL URLWithString:launchURL]]) {
+	if ([[UIApplication sharedApplication] canOpenURL: launchURL]) {
 		[[UIApplication sharedApplication] openURL:launchURL];
 		pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
 		[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
