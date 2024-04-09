@@ -54,20 +54,7 @@ public class Launcher extends CordovaPlugin {
 		if (ACTION_CAN_LAUNCH.equals(action)) {
 			return canLaunch(args);
 		} else if (ACTION_LAUNCH.equals(action)) {
-			//return launch(args);
-			final JSONObject options = args.getJSONObject(0);
-			final String appPackageName = options.getString("packageName");
-			final String orgID = options.getString("orgID");
-
-			if (isApplicationInstalled(appPackageName)) {
-				// Launch MyChart with the organization selected
-				startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("epicmychart://orgselect?orgID="+orgID)));
-		 	}
-		 	else {
-				// Open MyChart in play store
-				openApplicationInStore(appPackageName);
-		 	}
-		 	return true;
+			return launch(args);
 		}
 		return false;
 	}
@@ -548,48 +535,4 @@ public class Launcher extends CordovaPlugin {
 		}
 		return null;
 	}
-
-	  /**
-       * Check if an application is installed
-       * 
-        * @param packageName
-       *            - The full name (i.e. com.google.apps.contacts) of the desired application package.
-       * @return true if installed, false otherwise
-       */
-	private boolean isApplicationInstalled(String packageName) {
-
-		final CordovaPlugin plugin = this;
- 
-		PackageManager packageManager = plugin.webView.getContext().getPackageManager();
-		boolean isInstalled = false;
-
-		try {
-			   packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
-
-			   //getPackageInfo throws PackageManager.NameNotFoundException if a package with the given name cannot be found on the system.
-			   //If no exception thrown, the application is installed.
-			   isInstalled = true;
-		}
-		catch (PackageManager.NameNotFoundException exception) {
-			   //not installed
-		}
-
-		return isInstalled;
- 	}
-
-	 /**
-       * Open the application in Google play store
-       * 
-        * @param packageName
-       *            - The full name (i.e. com.google.apps.contacts) of the desired application package.
-       */
-	private void openApplicationInStore(String packageName) {
-		try {
-			   //open in Market if installed
-			   startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + packageName)));
-		}
-		catch (android.content.ActivityNotFoundException exception) {
-			   startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + packageName)));
-		}
- 	}
 }
