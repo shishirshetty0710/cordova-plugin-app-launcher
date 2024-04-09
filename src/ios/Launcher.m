@@ -29,10 +29,13 @@
 
 	if ([[UIApplication sharedApplication] canOpenURL: [NSURL URLWithString:launchURL]]) {
 		[[UIApplication sharedApplication] openURL:launchURL];
-
+		pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+		[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 	} else {
 		NSURL *launchURL_ = [NSURL URLWithString:@"https://itunes.apple.com/us/app/mychart/id382952264?mt=8"];
 		[[UIApplication sharedApplication] openURL:launchURL_];
+		pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+		[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 	}
 }
 
