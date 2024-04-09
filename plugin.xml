@@ -19,6 +19,15 @@
 				<param name="ios-package" value="Launcher" />
 			</feature>
 		</config-file>
+
+		<!-- Info.plist - LSApplicationQueriesSchemes -->
+        <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
+            <array>
+                <string>epicmychart</string>
+            </array>
+        </config-file>
+        <!-- END Info.plist - LSApplicationQueriesSchemes -->
+
 		<header-file src="src/ios/Launcher.h" />
 		<source-file src="src/ios/Launcher.m" />
 	</platform>
