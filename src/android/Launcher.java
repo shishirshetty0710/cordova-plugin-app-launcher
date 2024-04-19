@@ -60,10 +60,11 @@ public class Launcher extends CordovaPlugin {
 			final JSONObject options = args.getJSONObject(0);
 			final String appPackageName = options.getString("packageName");
 			final String orgID = options.getString("orgID");
+			final String uRI = options.getString("uri");
 
 			if (isApplicationInstalled(appPackageName)) {
 				// Launch MyChart with the organization selected
-				 this.cordova.getActivity().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("epicmychart://orgselect?orgID="+orgID)));
+				 this.cordova.getActivity().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(uRI+orgID)));
 		 	}
 		 	else {
 				// Open MyChart in play store

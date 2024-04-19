@@ -25,14 +25,18 @@
 - (void)launch:(CDVInvokedUrlCommand*)command {
 	CDVPluginResult * pluginResult = nil;
 
-	NSURL *launchURL = [NSURL URLWithString:@"epicmychart://orgselect?orgID=1353"];
+	NSString *uri = [options objectForKey:@"uri"];
+	NSString *orgID = [options objectForKey:@"orgID"];
+	NSString *appStoreLink = [options objectForKey:@"appStoreLink"];
+
+	NSURL *launchURL = [NSURL URLWithString:uri+orgID];
 
 	if ([[UIApplication sharedApplication] canOpenURL: launchURL]) {
 		[[UIApplication sharedApplication] openURL:launchURL];
 		pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
 		[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 	} else {
-		NSURL *launchURL_ = [NSURL URLWithString:@"https://itunes.apple.com/us/app/mychart/id382952264?mt=8"];
+		NSURL *launchURL_ = [NSURL URLWithString:appStoreLink];
 		[[UIApplication sharedApplication] openURL:launchURL_];
 		pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
 		[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
