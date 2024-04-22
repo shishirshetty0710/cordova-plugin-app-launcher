@@ -23,6 +23,7 @@
 }
 
 - (void)launch:(CDVInvokedUrlCommand*)command {
+	NSDictionary* options = [command.arguments objectAtIndex:0];
 	CDVPluginResult * pluginResult = nil;
 
 	NSString *uri = [options objectForKey:@"uri"];
