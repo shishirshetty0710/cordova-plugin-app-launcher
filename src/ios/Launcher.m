@@ -30,7 +30,8 @@
 	NSString *orgID = [options objectForKey:@"orgID"];
 	NSString *appStoreLink = [options objectForKey:@"appStoreLink"];
 
-	NSURL *launchURL = [NSURL URLWithString:uri+orgID];
+	NSString *concat = [NSString stringWithFormat: @"%@%@", uri, orgID];
+	NSURL *launchURL = [NSURL URLWithString:concat];
 
 	if ([[UIApplication sharedApplication] canOpenURL: launchURL]) {
 		[[UIApplication sharedApplication] openURL:launchURL];
